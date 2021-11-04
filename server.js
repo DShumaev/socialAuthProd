@@ -29,9 +29,11 @@ app.use(passport.initialize())
 
 if (process.env.PROD === 'production') {
     app.use(express.static(path.resolve(__dirname + '/public')))
-    app.get('/', (req, res) => {
+    const getMainPage = (req, res) => {
         res.sendFile(path.resolve(__dirname + '/public/index.html'))
-    })
+    }
+    app.get('/', getMainPage)
+    app.get('/auth', getMainPage)
 }
 
 app.use('/auth', authRouter)
