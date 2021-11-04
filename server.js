@@ -25,8 +25,9 @@ app.use(express.json({extended:true}))
 passportUseStrategies(passport)
 app.use(passport.initialize())
 
+const isProd = true
 
-if (process.env.NODE_ENV === 'production') {
+if (isProd) {
     app.use(express.static(path.resolve(__dirname + '/public')))
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname + '/public/index.html'))
