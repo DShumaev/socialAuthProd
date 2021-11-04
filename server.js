@@ -11,7 +11,7 @@ const socketHandler = require('./socket')
 const path = require('path')
 
 
-const PORT = process.env.PORT || 6000
+const PORT = process.env.PORT || config.get('port')
 const mongoURI = config.get('mongoUri')
 
 const app = express()
@@ -25,11 +25,11 @@ app.use(express.json({extended:true}))
 passportUseStrategies(passport)
 app.use(passport.initialize())
 
-const isProd = true
 
-if (isProd) {
+
+if (process.env.PROD === 'production') {
     app.use(express.static(path.resolve(__dirname + '/public')))
-    app.get('*', (req, res) => {
+    app.get('/', (req, res) => {
         res.sendFile(path.resolve(__dirname + '/public/index.html'))
     })
 }
