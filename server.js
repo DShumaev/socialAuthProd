@@ -11,7 +11,7 @@ const socketHandler = require('./socket')
 const path = require('path')
 
 
-const PORT = config.get('port') || 6000
+const PORT = process.env.PORT || 6000
 const mongoURI = config.get('mongoUri')
 
 const app = express()
